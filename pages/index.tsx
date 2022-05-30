@@ -16,17 +16,17 @@ const Home: NextPage = () => {
   };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const loadingToastId = toast.loading("Loading...");
+    const toastId = toast.loading("Loading...");
     const response = await fetch("/api/form", {
       method: "POST",
       body: JSON.stringify(upi),
     });
 
-    toast.dismiss(loadingToastId);
+    // toast.dismiss(loadingToastId);
     if (!response.ok) {
-      toast.error("Already sent ₹1");
+      toast.error("Already sent ₹1", { id: toastId });
     } else {
-      toast.success("Successfully sent ₹1");
+      toast.success("Successfully sent ₹1", { id: toastId });
     }
 
     setUPI(formEmptyState);
